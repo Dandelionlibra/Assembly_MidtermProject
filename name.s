@@ -1,11 +1,12 @@
 .data
 msg1:
-    .space  4
+    .word  msg1
     .asciz  "Name Function\n" @ 15
 msg2:
-    .word   0xcafebabe
+    .word   msg2
     .asciz  "*****Print Name*****\n" @ 22
 msg3:
+    .word   msg3
     .asciz  "Team 17\n" @ 9
 name1:
     .asciz  "Lo Haichi\n" @
@@ -22,19 +23,36 @@ strset:
     .word name3
 
     .globl msg1
+    .globl msg2
+    .globl msg3
+    .globl msg4
+    .globl strset
 
 .text
 	.globl	name
 name:
 	stmfd	sp!,{lr}	@ push return address onto stack
 
-    ldr     r0,=msg1
+    ldr     r4,=msg1
+    ldr     r0,[r4]
+    add     r0,r0,#4
+    mov     r0, r0
 	bl		printf
 
-	ldr		r0,=msg2
+	ldr		r4,=msg2
+    mov     r2, #1
+    mov     r0, r0
+    ldr     r0,[r4, r2, lsl #2]!
+    mov     r0, r4
+    mov     r0, r0
 	bl		printf
 
-	ldr     r0,=msg3
+	ldr     r4,=msg3
+    mov     r2, #4
+    mov     r0, r0
+    ldr     r0,[r4], r2
+    mov     r0, r4
+    mov     r0, r0
 	bl      printf
 
     mov     r4,#0
