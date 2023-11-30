@@ -16,7 +16,6 @@ msg1:
 id:
     .text
 	stmfd	sp!,{lr}	@ push return address onto stack
-    name
 	
 	
 	mov		r0, #0		@ move return value into r0
