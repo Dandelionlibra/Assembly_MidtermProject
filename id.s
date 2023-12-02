@@ -75,13 +75,6 @@ id:
     ldr   r0, =fmtstrint
     ldr   r1, =idlist
     bl    scanf
-    ldr   r0, =idlist
-    ldr   r0, [r0]
-    ldr   r1, =summation
-    ldr   r1, [r1]
-    add   r1, r1, r0
-    ldr   r0, =summation
-    str   r1, [r0]
 @--------------------
     ldr   r0, =idmsg3
     bl    printf
@@ -89,13 +82,6 @@ id:
     ldr   r0, =fmtstrint
     ldr   r1, =idlist+4
     bl    scanf
-    ldr   r0, =idlist+4
-    ldr   r0, [r0]
-    ldr   r1, =summation
-    ldr   r1, [r1]
-    add   r1, r1, r0
-    ldr   r0, =summation
-    str   r1, [r0]
 @--------------------
     ldr   r0, =idmsg4
     bl    printf
@@ -103,43 +89,36 @@ id:
     ldr   r0, =fmtstrint
     ldr   r1, =idlist+8
     bl    scanf
-    ldr   r0, =idlist+8
-    ldr   r0, [r0]
-    ldr   r1, =summation
-    ldr   r1, [r1]
-    add   r1, r1, r0
-    ldr   r0, =summation
-    str   r1, [r0]
-@--------------------
+@====================
 loop2:
     ldr   r0, =idmsg5
     bl    printf
-@====================  @ input command
+@ input command
     ldr   r0, =fmtstr
     ldr   r1, =inputstr
     bl    scanf
-@====================
+
     @ if inputstr != "p", then jump to loop2
     ldr   r0, =inputstr
     ldr   r1, =command
     bl    strcmp
     cmp   r0, #0
     bne   loop2
-@--------------------
+@====================
     ldr   r0, =idmsg6
     bl    printf
-@--------------------
+@ print id1
 
     ldr   r0, =intendl
     ldr   r1, =idlist
     ldr   r1, [r1]
     bl   printf
-@--------------------
+@ print id2
     ldr   r0, =intendl
     ldr   r1, =idlist+4
     ldr   r1, [r1]
     bl   printf
-@--------------------
+@ print id3
     ldr   r0, =intendl
     ldr   r1, =idlist+8
     ldr   r1, [r1]
@@ -149,14 +128,31 @@ loop2:
 
     ldr   r0, =idmsg7
     bl    printf
-@--------------------
+
+
+@ calculate summation
+
+    mov   r4, #0
+loop3:
+    ldr   r0, =idlist
+    ldr   r0, [r0, r4]
+    ldr   r1, =summation
+    ldr   r1, [r1]
+    add   r1, r1, r0
+    ldr   r0, =summation
+    str   r1, [r0]
+    add   r4, r4, #4
+    cmp   r4, #12
+    blt   loop3
+
+@ print summation
 
     ldr  r0, =intendl
     ldr  r1, =summation
     ldr  r1, [r1]
     bl   printf
 
-@--------------------
+@ end print
 
     ldr   r0, =idmsg8
     bl    printf
