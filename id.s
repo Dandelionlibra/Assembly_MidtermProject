@@ -47,10 +47,15 @@ msg7:
 	.globl	id
 id:	
 	stmfd	sp!,{lr}	@ push return address onto stack
+<<<<<<< HEAD
 
     @bl      name
 
 
+=======
+	
+	
+>>>>>>> ac87d6840bfdbe49b8ad258224d5811eaf092926
 	mov		r0, #0		@ move return value into r0
 	ldmfd	sp!, {lr}
 	mov		pc, lr
