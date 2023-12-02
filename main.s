@@ -28,6 +28,7 @@ main:
     ldr     r0, [r0]
     add     r0, r0, #4
     bl      printf
+    mov     r0, r0, asl #0
 	bl		name
 
 
