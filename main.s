@@ -1,4 +1,3 @@
-
 .text
 	@.globl	name
 	.globl  main

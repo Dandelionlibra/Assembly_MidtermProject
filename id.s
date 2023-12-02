@@ -5,15 +5,15 @@ msg1:
 msg2:
     .asciz  "**Please Enter Member "
 msg3:
-    .asciz  " ID:**\n"	
-	
+    .asciz  " ID:**\n"
+
 summation:
 	.word	0
     .asciz  "%d"
 idlist:
 	.word	0
     .asciz  "%d"
-	
+
 	.word	0
     .asciz  "%d"
 
@@ -38,24 +38,19 @@ msg7:
     .globl	msg5
     .globl	msg6
     .globl	msg7
-	
+
     .globl	summation
     .globl	idlist
 
 
 .text
 	.globl	id
-id:	
+id:
 	stmfd	sp!,{lr}	@ push return address onto stack
-<<<<<<< HEAD
 
     @bl      name
 
 
-=======
-	
-	
->>>>>>> ac87d6840bfdbe49b8ad258224d5811eaf092926
 	mov		r0, #0		@ move return value into r0
 	ldmfd	sp!, {lr}
 	mov		pc, lr
