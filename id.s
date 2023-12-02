@@ -1,6 +1,4 @@
     .data
-idmsg0:
-    .asciz  "Function 2: ID\n"
 idmsg1:
     .asciz  "*****Input ID*****\n"
 idmsg2:
@@ -37,12 +35,16 @@ idmsg5:
 idmsg6:
     .asciz  "*****Print Team Member ID and ID Summation*****\n"
 idmsg7:
-    .asciz  "\nID Summation = "
+    .asciz  "ID Summation = "
 idmsg8:
     .asciz  "*****End Print*****\n"
 
     .globl	summation
+    .globl  fmtstr
     .globl	idlist
+    .globl  idmsg7
+    .globl  intendl
+    .globl  idmsg8
 
 
 .text
@@ -55,21 +57,16 @@ id:
 @--------------------
     mov     r0, lr      @ save return address
     adds    lr, pc, r0  @ !!!
-    mov     lr, r0      @ restore return address
-@--------------------
-    and   r0, r0, #0   @ clear r0
-    orrs   r0, r0, #1
-    ldrne    r0, =idmsg0   @ load address of msg1 into r0
-    bl     printf      @ call printf
+    mov     lr, r0      
 @--------------------
     eors  r0, r0, r0   @ clear r0
     cmp   r0, #1
-    ldrlt    r0, =idmsg1   @ load address of msg1 into r0
+    ldrlt    r0, =idmsg1
     bl    printf      @ call printf
 @--------------------
     mov   r0, #1
     cmp   r0, #0
-    ldrgt  r0, =idmsg2   @ load address of msg1 into r0
+    ldrgt  r0, =idmsg2 
     bl    printf      @ call printf
 @--------------------  @ input id1
     ldr   r0, =fmtstrint
@@ -126,6 +123,8 @@ loop2:
 
 @--------------------
 
+    ldr   r0, =endl
+    bl    printf
     ldr   r0, =idmsg7
     bl    printf
 
