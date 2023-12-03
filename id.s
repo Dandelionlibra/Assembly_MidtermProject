@@ -1,12 +1,17 @@
     .data
+	.align 4
 idmsg1:
     .asciz  "*****Input ID*****\n"
+	.align 4
 idmsg2:
     .asciz  "** Please Enter Member 1 ID:**\n"
+	.align 4
 idmsg3:
     .asciz  "** Please Enter Member 2 ID:**\n"
+	.align 4
 idmsg4:
     .asciz  "** Please Enter Member 3 ID:**\n"
+	.align 4
 
 summation:
 	.word	0
@@ -15,27 +20,36 @@ idlist:
 	.word	0
 	.word	0
 
+.align 4
 inputstr:
-    .align  10
+    .space 128
 
+.align 4
 fmtstrint:					@ buffer when scanf id
     .asciz  "%d"
 
+.align 4
 fmtstr:						@ buffer when scanf command
     .asciz  "%s"
 
+.align 4
 command:
     .asciz  "p"
 
+.align 4
 intendl:
     .asciz  "%d\n"
 
+.align 4
 idmsg5:
     .asciz  "** Please Enter Command **\n"
+.align 4
 idmsg6:
     .asciz  "*****Print Team Member ID and ID Summation*****\n"
+.align 4
 idmsg7:
     .asciz  "ID Summation = "
+.align 4
 idmsg8:
     .asciz	"*****End Print*****\n"
 

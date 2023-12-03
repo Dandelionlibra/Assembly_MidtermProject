@@ -1,19 +1,25 @@
 .data
-
+.align 4
 msg2:
     .word   msg2            @ msg2 store the address of label msg1 (4 bytes)
     .asciz  "*****Print Name*****\n"
+	.align 4
 msg3:
     .word   msg3
     .asciz  "Team 17\n"
+	.align 4
 name1:
     .asciz  "Lo Haichi\n"
+	.align 4
 name2:
     .asciz  "Huang Yijia\n"
+	.align 4
 name3:
     .asciz  "Lin Yuchen\n"
+	.align 4
 msg4:
     .asciz  "*****End Print*****\n"
+	.align 4
 
 strset:                     @ Array
     .word   name1

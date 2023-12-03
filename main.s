@@ -1,22 +1,27 @@
 .data
-
+    .align 4
 namefunc:
     .word   namefunc
     .asciz  "Function1: Name\n"
-
+    .align 4
 idfunc:
     .asciz  "Function2: ID\n"
+	.align 4
 
 mainmsg1:
     .asciz   "\nMain Function:\n"
+	.align 4
 mainmsg2:
     .asciz   "*****Print All*****\n"
+	.align 4
 
 endl:
     .asciz   "\n"
+	.align 4
 
 fmtStrIntSpace:
     .asciz  "%d "
+	.align 4
 
     .globl  endl
 
