@@ -1,13 +1,13 @@
 .data
 
 msg2:
-    .word   msg2
-    .asciz  "*****Print Name*****\n" @ 22
+    .word   msg2            @ msg2 store the address of label msg1 (4 bytes)
+    .asciz  "*****Print Name*****\n"
 msg3:
     .word   msg3
-    .asciz  "Team 17\n" @ 9
+    .asciz  "Team 17\n"
 name1:
-    .asciz  "Lo Haichi\n" @
+    .asciz  "Lo Haichi\n"
 name2:
     .asciz  "Huang Yijia\n"
 name3:
@@ -15,50 +15,50 @@ name3:
 msg4:
     .asciz  "*****End Print*****\n"
 
-strset:
-    .word name1
-    .word name2
-    .word name3
+strset:                     @ Array
+    .word   name1
+    .word   name2
+    .word   name3
 
-    .globl msg2
-    .globl msg3
-    .globl msg4
-    .globl strset
+    .globl  msg2
+    .globl  msg3
+    .globl  msg4
+    .globl  strset
 
 .text
-	.globl	name
+    .globl  name
 name:
 	stmfd	sp!,{lr}	@ push return address onto stack
 
-	ldr		r4,=msg2
-    mov     r2, #1
-    ldr     r0,[r4, r2, lsl #2]!
-    mov     r0, r4
-	bl		printf
+	ldr		r4,=msg2    @ r4 = *msg2
+    mov     r2, #1      @ r2 = 1
+    ldr     r0,[r4, r2, lsl #2]!	@ r0 = *(r4 + r2<<4) (logical shift left 2),
+                                    @ then store the address in r4(2.Addressing mode)(Operand2)
+    mov     r0, r4      @ r0 = r4
+	bl		printf      @ printf("*****Print Name*****\n")
 
-	ldr     r4,=msg3
-    mov     r2, #4
-    ldr     r0,[r4], r2
-    mov     r0, r4
-	bl      printf
+	ldr     r4,=msg3    @ r4 = *msg3
+    mov     r2, #4      @ r2 = 4
+    ldr     r0,[r4], r2 @ load r0 with word at the address r4 then increment r4 by r2 (3.Addressing mode)
+    mov     r0, r4      @ r0 = r4
+	bl      printf      @ printf("Team 17\n")
 
-    mov     r4,#0
+    mov     r4,#0       @ r4 = 0
 loop:
-    eors     r0,r0,r0
-    ldreq     r0,=strset
-    ldr     r0,[r0, r4]
-    bl      printf
-    add     r4,r4,#4
-    cmp     r4,#12
-    blt     loop
-
-    ldr     r0,=msg4
-    bl      printf
+    eors	r0,r0,r0			@ r0 = r0^r0(expression = 0) and set CPSR flags(Z set 1)
+    ldreq	r0,=strset			@ if Z == 1, r0 = *(strset) (Conditional Execution)
+    ldr		r0,[r0, r4]			@ r0 = r0 + r4; r0 = r0 + 0
+    bl		printf				@ printf(strset)
+    add		r4,r4,#4			@ r4 = r4 + 4
+    cmp		r4,#12				@ if(r4 == 12) (Operand2)
+    blt		loop				@ jump to loop
 
 
-
-	mov		r0, #0		@ move return value into r0
-	ldmfd	sp!, {lr}
-	mov		pc, lr
+    ldr		r0,=msg4			@ r0 = * msg4
+    bl		printf				@ printf("*****End Print*****\n")
 
 
+
+	mov		r0, #0				@ move return value into r0
+	ldmfd	sp!, {lr}           @ pop return address from stack
+	mov		pc, lr              @ return from name
